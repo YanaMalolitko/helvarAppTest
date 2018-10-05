@@ -1,0 +1,17 @@
+{
+    "payload": [
+    {
+      "id": "1000",
+      "info": "Device A new"
+    },
+    {
+      "id": "1001",
+      "info": "Device B"
+    }
+  ,
+    {
+      "id": "1002",
+      "info": "Device C"
+    }
+  ]
+}
