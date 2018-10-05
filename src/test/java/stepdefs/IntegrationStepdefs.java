@@ -8,6 +8,7 @@ import redis.clients.jedis.Jedis;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.*;
@@ -67,7 +68,7 @@ public class IntegrationStepdefs {
 
 
     @When("^I send the devices information in a wrong format$")
-    public void i_send_the_devices_information_in_a_wrong_format(DataTable fileName ) throws Throwable {
+    public void i_send_the_devices_information_in_a_wrong_format(List<String> fileName ) throws Throwable {
 
         process = Runtime.getRuntime().exec("node ./src/main/helvar/node_modules/helvar-test/index.js  C:\\Users\\Yana\\IdeaProjects\\www\\helvarAppTest\\src\\main\\helvar\\test-data\\"+fileName+"\n");
 
@@ -86,7 +87,7 @@ public class IntegrationStepdefs {
     public void i_delete_the_data_by_key_from_DB(String key) throws Throwable {
        String deletionRequest  = String.valueOf(jedis.del(key));
 
-       assertEquals( deletionRequest, 1);
+       assertEquals( String.valueOf(deletionRequest), "1");
     }
 
 
