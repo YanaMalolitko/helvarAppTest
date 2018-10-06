@@ -1,20 +1,17 @@
 package stepdefs;
 
-import cucumber.api.DataTable;
-import cucumber.api.PendingException;
-import cucumber.api.java.en.*;
-import redis.clients.jedis.Jedis;
+        import cucumber.api.java.en.*;
+        import redis.clients.jedis.Jedis;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+        import java.io.BufferedReader;
+        import java.io.InputStreamReader;
+        import java.util.List;
+        import java.util.Map;
 
-import static org.junit.Assert.*;
+        import static org.junit.Assert.*;
 
 
-public class IntegrationStepdefs {
+public class IntegrationStepDefs {
 
     Jedis jedis = new Jedis("127.0.0.1", 6379);
     Map<String, String> allRecords = null;
@@ -26,12 +23,13 @@ public class IntegrationStepdefs {
         process = Runtime.getRuntime().exec("node ./src/main/helvar/node_modules/helvar-test/index.js  C:\\Users\\Yana\\IdeaProjects\\www\\helvarAppTest\\src\\main\\helvar\\test-data\\" + testFile + "\n");
         BufferedReader stdInput = new BufferedReader(new
                 InputStreamReader(process.getInputStream()));
-//        System.out.println("Input:" + stdInput.readLine());
-
         BufferedReader stdError = new BufferedReader(new
                 InputStreamReader(process.getErrorStream()));
         System.out.println("Error:" + stdError.readLine());
 
+        String status = jedis.save();
+
+        assertEquals("OK", status);
         assertFalse(stdInput == null);
         assertFalse(stdError == null);
     }
@@ -60,7 +58,7 @@ public class IntegrationStepdefs {
     @Then("^for concrete \"([^\"]*)\" the device \"([^\"]*)\" is correct$")
     public void device_device_for_concrete_is_correct(String id, String information) throws Throwable {
 
-        String actualDataById= jedis.hget("helvar",id);
+        String actualDataById = jedis.hget("helvar", id);
         System.out.println(actualDataById);
         assertEquals(information, actualDataById);
 
@@ -68,9 +66,9 @@ public class IntegrationStepdefs {
 
 
     @When("^I send the devices information in a wrong format$")
-    public void i_send_the_devices_information_in_a_wrong_format(List<String> fileName ) throws Throwable {
+    public void i_send_the_devices_information_in_a_wrong_format(List<String> fileName) throws Throwable {
 
-        process = Runtime.getRuntime().exec("node ./src/main/helvar/node_modules/helvar-test/index.js  C:\\Users\\Yana\\IdeaProjects\\www\\helvarAppTest\\src\\main\\helvar\\test-data\\"+fileName+"\n");
+        process = Runtime.getRuntime().exec("node ./src/main/helvar/node_modules/helvar-test/index.js  C:\\Users\\Yana\\IdeaProjects\\www\\helvarAppTest\\src\\main\\helvar\\test-data\\" + fileName + "\n");
 
     }
 
@@ -79,15 +77,15 @@ public class IntegrationStepdefs {
         BufferedReader stdError = new BufferedReader(new
                 InputStreamReader(process.getErrorStream()));
         System.out.println("Error:" + stdError.readLine());
-        assertTrue(stdError !=null);
+        assertTrue(stdError != null);
     }
 
 
     @When("^I delete the data by \"([^\"]*)\" key from DB$")
     public void i_delete_the_data_by_key_from_DB(String key) throws Throwable {
-       String deletionRequest  = String.valueOf(jedis.del(key));
-
-       assertEquals( String.valueOf(deletionRequest), "1");
+        String deletionRequest = String.valueOf(jedis.del(key));
+        Thread.sleep(2000);
+        assertEquals(String.valueOf(deletionRequest), "1");
     }
 
 

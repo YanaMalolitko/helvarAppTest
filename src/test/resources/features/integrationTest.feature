@@ -1,4 +1,4 @@
-Feature: devices storage app
+Feature: integration test of devices storage app
   I should be able to send devices information
   as JSON file, stored it redis database
   and get the data in a correct format

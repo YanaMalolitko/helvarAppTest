@@ -10,8 +10,9 @@ import org.testng.annotations.Test;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/resources/features/integrationTest.feature",
-      //  glue = {"src/test/java/stepdefs/IntegrationStepdefs.java"},
+        features = {"src/test/resources/features/integrationTest.feature",
+                "src/test/resources/features/performanceTest.feature"},
+      //  glue = {"src/test/java/stepdefs/IntegrationStepDefs.java"},
         tags = {"~@Ignore"},
         format = {
                 "pretty",

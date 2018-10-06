@@ -1,0 +1,15 @@
+{
+  "header": {
+    "version": "1.0"
+  },
+  "payload": [
+    {
+      "id": "1004",
+      "info": "Device c"
+    },
+    {
+      "id": "1005",
+      "info": "Device D"
+    }
+  ]
+}
