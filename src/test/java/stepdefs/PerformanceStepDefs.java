@@ -19,14 +19,14 @@ public class PerformanceStepDefs {
 
         for (int i = 0; i < replicationNumber; i++) {
 
-            process = Runtime.getRuntime().exec("node ./src/main/helvar/node_modules/helvar-test/index.js  C:\\Users\\Yana\\IdeaProjects\\www\\helvarAppTest\\src\\main\\helvar\\test-data\\initialLoad.json\n");
+            process = Runtime.getRuntime().exec("node ./src/main/helvar/node_modules/helvar-test/index.js  C:\\Users\\Yana\\IdeaProjects\\www\\helvarAppTest\\src\\test\\java\\test-data\\initialLoad.json\n");
             BufferedReader stdInput = new BufferedReader(new
                     InputStreamReader(process.getInputStream()));
             BufferedReader stdError = new BufferedReader(new
                     InputStreamReader(process.getErrorStream()));
 //            System.out.println("Error:" + stdError.readLine());
             String status = jedis.save();
-
+            Thread.sleep(2000);
             assertEquals("OK", status);
             assertFalse(stdInput == null);
             assertTrue(stdError != null);
