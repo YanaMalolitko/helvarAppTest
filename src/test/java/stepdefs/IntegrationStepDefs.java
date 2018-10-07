@@ -1,6 +1,7 @@
 package stepdefs;
 
         import cucumber.api.java.en.*;
+        import org.junit.Test;
         import redis.clients.jedis.Jedis;
 
         import java.io.BufferedReader;
@@ -20,7 +21,7 @@ public class IntegrationStepDefs {
     @Given("^The JSON \"([^\"]*)\" file is sent to Redis$")
     public void the_JSON_file_is_sent_to_Redis(String testFile) throws Exception {
 
-        process = Runtime.getRuntime().exec("node ./src/main/helvar/node_modules/helvar-test/index.js  C:\\Users\\Yana\\IdeaProjects\\www\\helvarAppTest\\src\\main\\helvar\\test-data\\" + testFile + "\n");
+        process = Runtime.getRuntime().exec("node ./src/main/helvar/node_modules/helvar-test/index.js  C:\\Users\\Yana\\IdeaProjects\\www\\helvarAppTest\\src\\test\\java\\test-data\\" + testFile + "\n");
         BufferedReader stdInput = new BufferedReader(new
                 InputStreamReader(process.getInputStream()));
         BufferedReader stdError = new BufferedReader(new
@@ -68,7 +69,7 @@ public class IntegrationStepDefs {
     @When("^I send the devices information in a wrong format$")
     public void i_send_the_devices_information_in_a_wrong_format(List<String> fileName) throws Throwable {
 
-        process = Runtime.getRuntime().exec("node ./src/main/helvar/node_modules/helvar-test/index.js  C:\\Users\\Yana\\IdeaProjects\\www\\helvarAppTest\\src\\main\\helvar\\test-data\\" + fileName + "\n");
+        process = Runtime.getRuntime().exec("node ./src/main/helvar/node_modules/helvar-test/index.js  C:\\Users\\Yana\\IdeaProjects\\www\\helvarAppTest\\src\\test\\java\\test-data\\" + fileName + "\n");
 
     }
 
@@ -87,6 +88,5 @@ public class IntegrationStepDefs {
         Thread.sleep(2000);
         assertEquals(String.valueOf(deletionRequest), "1");
     }
-
 
 }

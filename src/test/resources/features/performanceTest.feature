@@ -4,7 +4,6 @@ Feature: performance test of devices storage app
   and get the data in a correct format
 
 
-
   Scenario: data updating check
     When I send JSON file is sent to Redis 1000 times
     Then it is successfully added
