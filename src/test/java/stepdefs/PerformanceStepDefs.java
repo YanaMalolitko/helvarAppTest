@@ -8,10 +8,11 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 import static org.junit.Assert.*;
+import static stepdefs.Constants.*;
 
 public class PerformanceStepDefs {
 
-    Jedis jedis = new Jedis("127.0.0.1", 6379);
+    Jedis jedis = new Jedis(HOST, PORT);
     Process process = null;
 
     @When("^I send JSON file is sent to Redis (\\d+) times$")
@@ -19,7 +20,7 @@ public class PerformanceStepDefs {
 
         for (int i = 0; i < replicationNumber; i++) {
 
-            process = Runtime.getRuntime().exec("node ./src/main/helvar/node_modules/helvar-test/index.js  C:\\Users\\Yana\\IdeaProjects\\www\\helvarAppTest\\src\\test\\java\\test-data\\initialLoad.json\n");
+            process = Runtime.getRuntime().exec(RUN_TEST_COMMAND+TEST_DATA_PATH  +"initialLoad.json\n");
             BufferedReader stdInput = new BufferedReader(new
                     InputStreamReader(process.getInputStream()));
             BufferedReader stdError = new BufferedReader(new
@@ -36,7 +37,7 @@ public class PerformanceStepDefs {
 
     @Then("^it is successfully added$")
     public void it_is_successfully_added() throws Throwable {
-        Long recordsNumber = jedis.hlen("helvar");
+        Long recordsNumber = jedis.hlen(KEY);
         System.out.println(jedis.info("CPU"));
         assertEquals("2", String.valueOf(recordsNumber));
     }

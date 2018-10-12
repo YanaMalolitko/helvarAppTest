@@ -40,8 +40,8 @@ Feature: integration test of devices storage app
       | payloadDeleted.json |
       | payloadNoId.json    |
       | payloadNoInfo.json  |
-      | payloadNoArray.json |
-    Then I get the error message
+      | payloadNotArray.json |
+#    Then I get the error message
     And I see that 0 devices are in the DB
 
 
