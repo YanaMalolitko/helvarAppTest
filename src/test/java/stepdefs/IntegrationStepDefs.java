@@ -1,16 +1,12 @@
 package stepdefs;
 
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import org.junit.Test;
-import redis.clients.jedis.Jedis;
+        import cucumber.api.java.en.*;
+        import redis.clients.jedis.Jedis;
 
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.List;
-import java.util.Map;
+        import java.io.BufferedReader;
+        import java.io.InputStreamReader;
+        import java.util.List;
+        import java.util.Map;
 
 import static org.junit.Assert.*;
 import static stepdefs.Constants.*;
@@ -18,11 +14,9 @@ import static stepdefs.Constants.*;
 
 public class IntegrationStepDefs {
 
-
     Jedis jedis = new Jedis(HOST, PORT);
     Map<String, String> allRecords = null;
     Process process = null;
-
 
     @Given("^The JSON \"([^\"]*)\" file is sent to Redis$")
     public void the_JSON_file_is_sent_to_Redis(String testFile) throws Exception {
@@ -98,5 +92,6 @@ public class IntegrationStepDefs {
         Thread.sleep(2000);
         assertEquals(String.valueOf(deletionRequest), "1");
     }
+
 
 }
